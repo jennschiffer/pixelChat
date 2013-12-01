@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+    <title>pixelChat &bull; a make8bitart.com joint</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+
+    <div id="pixelChat">
+        <h1>pixelChat</h1>
+
+        <ul id="pixelChat-messages"></ul>
+        
+        <form id="send-message" action="">
+           
+            <label for="message">draw & submit!</label>
+            <input type="text" name="nickname" />
+            <canvas width="400" height="300">You have 99 problems, and a browser without HTML5 Canvas support is 1.</canvas>
+            <div id="pixelChat-tools">[PLACEHOLDER FOR TOOLS]</div>
+            <input id="clear-canvas" type="submit" value="clear" /> <input id="send" type="submit" value="send" />
+            
+        </form>
+    </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/pixelchat.js"></script>
+
+</body>
+</html>
