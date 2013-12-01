@@ -7,19 +7,29 @@
 <body>
 
     <div id="pixelChat">
-        <h1>pixelChat</h1>
+        <h1>pixelChat <small>be nice. be creative. make art.</small></h1>
 
         <ul id="pixelChat-messages"></ul>
         
         <form id="send-message" action="">
-           
-            <label for="message">draw & submit!</label>
-            <input type="text" name="nickname" />
-            <canvas width="400" height="300">You have 99 problems, and a browser without HTML5 Canvas support is 1.</canvas>
-            <div id="pixelChat-tools">[PLACEHOLDER FOR TOOLS]</div>
-            <input id="clear-canvas" type="submit" value="clear" /> <input id="send" type="submit" value="send" />
+           	<h3>enter name, draw & submit! <small id="form-alert"></small></h3>
             
+            <label for="nickname">nickname (required): </label>
+            <input type="text" name="nickname" />
+            
+            <canvas width="400" height="150">You have 99 problems, and a browser without HTML5 Canvas support is 1.</canvas>
+           
+            <div id="pixelChat-tools">[PLACEHOLDER FOR TOOLS]</div>
+            
+            <div class="buttons">
+                <input id="clear-canvas" type="reset" value="clear canvas" /> 
+                <input id="send" type="submit" value="send message" />
+            </div>
         </form>
+        
+        <footer>
+        	<p>!!! made by <a href="http://twitter.com/jennschiffer">jenn</a> !!! go <a href="http://make8bitart.com">make8bitart.com</a> !!!</p>
+        </footer>
     </div>
 
 <script src="/socket.io/socket.io.js"></script>
