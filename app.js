@@ -21,6 +21,7 @@ server.listen(3000);
 io.sockets.on('connection', function (socket) {
   
     socket.on('send', function (data) { 
+    console.log(socket);
         if ( data.chat) {
             // send messages
             io.sockets.emit('message',data);            
