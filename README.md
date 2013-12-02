@@ -19,6 +19,6 @@ a node/websockets drawing chat adapted from [jsChat](http://github.com/jennschif
 
 1. works on browsers that support [socket.io](http://socket.io/#browser-support) and [html5 canvas](http://caniuse.com/canvas).
 
-2. you can see this in the wild on my own deployment at [make8bitart.com/chat](http://make8bitart.com/chat)
+2. if you're lucky and I didn't take it down yet, you can see this in the wild on my own deployment at [chat.make8bitart.com](http://chat.make8bitart.com)
 
 3. if you have suggestions and tips, please PLEASE [post an issue](https://github.com/jennschiffer/pixelChat/issues) or reach out to me <jenn@pancaketheorem.com>. I'd love to get some insight and feedback from those of you who are experienced with these technologies
