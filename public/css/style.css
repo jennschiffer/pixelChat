@@ -27,7 +27,7 @@ h1 small { display: block; font-size: .4em; text-transform: uppercase; }
 #send-message h3 { font-size: 20px; margin: 0 0 5px; }
 #send-message input[type="text"] { border: 1px solid #000; padding: 2px; }
 #send-message .buttons { text-align: right; }
-#form-alert { color: darkorchid; font-weight: normal; font-size: .8em; }
+#form-alert { background-color: #f00; color: #fff; font-weight: normal; font-size: .8em; }
 
 /* message canvas - set to 400px x 150px in index.html */
 #send-message canvas { display: block; border: 1px solid #000; background: #fff; margin: 3px auto; }
