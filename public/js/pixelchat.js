@@ -116,6 +116,11 @@ window.onload = function() {
     
     var updateMessageWindow = function(chatData) {
         banter.push(chatData);
+        
+        // remove one if array >= 50
+        if ( banter.length >= 50 ) {
+	        banter.shift();
+        }
         var banterHTML = '';
         
         for ( var i = 0; i < banter.length; i++ ) {
