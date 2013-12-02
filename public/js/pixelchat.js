@@ -116,15 +116,15 @@ window.onload = function() {
     
     var updateMessageWindow = function(chatData) {
         banter.push(chatData);
+        var banterHTML = '';
         
         // remove one if array >= 50
         if ( banter.length >= 50 ) {
 	        banter.shift();
         }
-        var banterHTML = '';
         
         for ( var i = 0; i < banter.length; i++ ) {
-	        banterHTML += '<li><img src="' + banter[i].imgURL + '" /><span class="nickname">' + banter[i].nickname + '</span></li>';
+	        banterHTML += '<li><img src="' + banter[i].imgURL + '" /><span class="nickname">' + stripHTML(banter[i].nickname) + '</span></li>';
         }
         messageContainer.innerHTML = banterHTML;
         $(messageContainer).animate({"scrollTop": messageContainer.scrollHeight}, "slow");
@@ -171,6 +171,11 @@ window.onload = function() {
         ctx.fillRect(0,0,system.canvasWidth,system.canvasHeight)
         
 	};
+	
+	/* misc */
+	function stripHTML(html) {
+	    return html.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>?/gi, '');
+	}
 
 
     
