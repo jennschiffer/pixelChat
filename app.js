@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 
 // index
 app.get('/', function(req, resp) {
-  resp.sendfile(__dirname + '/views/index.html');
+  resp.sendFile(__dirname + '/views/index.html');
 });
 
 /* socket.io */
@@ -29,5 +29,5 @@ io.sockets.on('connection', function (socket) {
     } 
   });
 
-  socket.on('disconnect', function () { });
+  socket.on('disconnect', function (){ });
 });
