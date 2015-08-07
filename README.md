@@ -14,6 +14,7 @@ a node/websockets drawing chat adapted from [jsChat](http://github.com/jennschif
 2. go into the jschat directory and install dependencies by running: <code>npm install</code> (dependencies: express, socket.io)
 3. to start chat server, run <code>npm start</code>
 4. direct your browser to <code>localhost:3000</code>
+5. if running this on another port or domain, change line 24 in `app.js` to match or else you'll get CORS errors
 
 ### Notes 
 
