@@ -7,9 +7,8 @@
   },
   "dependencies": {
     "express": "*",
-    "socket.io": "*"
-  },
-  "devDependencies": {
-    "body-parser": "^1.13.3"
+    "socket.io": "*",
+    "body-parser": "^1.13.3",
+    "twitter-node-client": "0.0.6"
   }
 }
