@@ -3,7 +3,7 @@ window.onload = function() {
   var messageContainer,
       messageForm,
       formAlert,
-      nickname,
+      username,
       imgURL, 
       socket, 
       banter,
@@ -35,10 +35,13 @@ window.onload = function() {
       
     /*** pixelChatroom and its events ***/
     messageContainer = document.getElementById('pixelChat-messages');
+    usernameContainer = document.getElementById('pixelChat-username');
+    usernameContainer.innerHTML = username;
+
     messageForm = document.forms[0];
     banter = [];
     
-    initialMessage = '<li><img src="' + system.initMessage + '" /><span class="nickname"><a target="_blank" href="http://twitter.com/jennschiffer">jenn$</a></span></li>';
+    initialMessage = '<li><img src="' + system.initMessage + '" /><span class="nickname"><a target="_blank" href="http://twitter.com/jennschiffer">@jennschiffer</a></span></li>';
     messageContainer.innerHTML = initialMessage;
   
     // canvas stuff 
@@ -66,16 +69,11 @@ window.onload = function() {
         
     // submit form event
     messageForm.onsubmit = function() {
-      nickname = messageForm.nickname.value;
       formAlert = document.getElementById('form-alert');
-      if ( !nickname ) {
-        formAlert.innerHTML = 'ENTER A NICKNAME, PAL!';
-        return false;
-      }
       formAlert.innerHTML = '';
   
       imgURL = $canvas[0].toDataURL("image/png");
-      sendMessage( nickname, imgURL );
+      sendMessage( username, imgURL );
       resetCanvas();
       return false;
     };
@@ -123,7 +121,7 @@ window.onload = function() {
     }
     
     for ( var i = 0; i < banter.length; i++ ) {
-      banterHTML += '<li><img src="' + banter[i].imgURL + '" /><span class="nickname">' + stripHTML(banter[i].nickname) + '</span></li>';
+      banterHTML += '<li><img src="' + banter[i].imgURL + '" /><span class="nickname"><a href="http://twitter.com/' + banter[i].username + '" target="_blank">@' + banter[i].username + '</a></span></li>';
     }
     messageContainer.innerHTML = banterHTML;
     $(messageContainer).animate({"scrollTop": messageContainer.scrollHeight}, "slow");
@@ -131,7 +129,7 @@ window.onload = function() {
   
   var sendMessage = function( nick, url ) {
     var message = {
-      nickname: nick,
+      username: nick,
       imgURL: url,
       timestamp: Date.now()
     };
@@ -171,16 +169,37 @@ window.onload = function() {
   };
   
   /* misc */
-  var stripHTML = function(html) {
-    return html.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>?/gi, '');
+  
+  var getCookies = function() {
+    var cookies = {};
+    var documentCookies = document.cookie;
+    if (documentCookies === "")
+      return cookies;
+    var cookiesArray = documentCookies.split("; ");
+    for(var i = 0; i < cookiesArray.length; i++) {
+      var cookie = cookiesArray[i];
+      var endOfName = cookie.indexOf("=");
+      var name = cookie.substring(0, endOfName);
+      var value = cookie.substring(endOfName + 1);
+      value = decodeURIComponent(value);
+      cookies[name] = value;
+    }
+    return cookies;
   };
+
 
 
     
   /*** INIT ***/
   
   var init = (function() {
-    initSocket();
+    var cookies = getCookies();
+    
+    if ( cookies.pixelchat) {
+      username = cookies.pixelchat;      
+      initSocket();
+    }
+
   }());
   
 };

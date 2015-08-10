@@ -6,53 +6,46 @@
 
 <body>
 
-    <div id="pixelChat">
-        <h1>pixelChat <small>speak in 8-bit & be nice.</small></h1>
+  <div id="pixelChat">
+    <h1 class="container">pixelChat <small>speak in 8-bit & be nice.</small></h1>
 
-        <ul id="pixelChat-messages"></ul>
-        
-        <form id="send-message" action="">
-           	<h3>enter name, draw & submit! <small id="form-alert"></small></h3>
+    <ul id="pixelChat-messages" class="container"></ul>
+    
+    <form id="send-message" action="" class="container">
+     	<h3>hi <span id="pixelChat-username">pal</span>! draw a message! <small id="form-alert"></small></h3>
             
-            <label for="nickname">nickname (required): </label>
-            <input type="text" name="nickname" />
-            
-            <canvas width="400" height="150">You have 99 problems, and a browser without HTML5 Canvas support is 1.</canvas>
-           
-            <div id="pixelChat-tools">
-	            
-	            <div class="button current" data-color="black"></div>
-	            <div class="button" data-color="white"></div>
-	            <div class="button" data-color="red"></div>
-	            <div class="button" data-color="orange"></div>
-	            <div class="button" data-color="yellow"></div>
-	            <div class="button" data-color="green"></div>
-	            <div class="button" data-color="blue"></div>
-	            <div class="button" data-color="purple"></div>
-	            <div class="button" data-color="brown"></div>
-	            <div class="button" data-color="aqua"></div>
-	            <div class="button" data-color="salmon"></div>	            
-	            <div class="button" data-color="hotpink"></div>
-	            <div class="button" data-color="lime"></div>
-	            <div class="button" data-color="royalblue"></div>
-	            <div class="button" data-color="wheat"></div>
-	            <div class="button" data-color="sienna"></div>
-	            <div class="button" data-color="lightblue"></div>
-
-
-	            
-            </div>
-            
-            <div class="buttons">
-                <input id="clear-canvas" type="reset" value="clear canvas" /> 
-                <input id="send" type="submit" value="send message" />
-            </div>
-        </form>
-        
-        <footer>
-        	<p>!!! made by <a href="http://twitter.com/jennschiffer">jenn</a> !!! go <a href="http://make8bitart.com">make8bitart.com</a> !!!</p>
-        </footer>
-    </div>
+      <canvas width="400" height="150">You have 99 problems, and a browser without HTML5 Canvas support is 1.</canvas>
+     
+      <div id="pixelChat-tools">
+        <div class="button current" data-color="black"></div>
+        <div class="button" data-color="white"></div>
+        <div class="button" data-color="red"></div>
+        <div class="button" data-color="orange"></div>
+        <div class="button" data-color="yellow"></div>
+        <div class="button" data-color="green"></div>
+        <div class="button" data-color="blue"></div>
+        <div class="button" data-color="purple"></div>
+        <div class="button" data-color="brown"></div>
+        <div class="button" data-color="aqua"></div>
+        <div class="button" data-color="salmon"></div>	            
+        <div class="button" data-color="hotpink"></div>
+        <div class="button" data-color="lime"></div>
+        <div class="button" data-color="royalblue"></div>
+        <div class="button" data-color="wheat"></div>
+        <div class="button" data-color="sienna"></div>
+        <div class="button" data-color="lightblue"></div>
+      </div>
+      
+      <div class="buttons">
+          <input id="clear-canvas" type="reset" value="clear canvas" /> 
+          <input id="send" type="submit" value="send message" />
+      </div>
+    </form>
+    
+    <footer class="container">
+    	<p>!!! made by <a href="http://twitter.com/jennschiffer">jenn</a> !!! go <a href="http://make8bitart.com">make8bitart.com</a> !!!</p>
+    </footer>
+  </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/jquery.js"></script>

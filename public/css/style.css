@@ -9,13 +9,15 @@
 
 /* makebitart style - just the grid bg and stick to neon colornames */
 * { box-sizing: border-box; }
-body { background: #fff url('../img/bg.png'); font-family: 'VT323', monospace; }
+html { background: #fff url('../img/bg.png'); font-family: 'VT323', monospace; }
+body {  }
 a { color: blue; text-decoration: blue; }
 
 /* pixelChat main */
 #pixelChat{ width: 430px; margin: 0 auto; }
-h1 { font-size: 3em; margin: 0 0 10px; }
+h1 { font-size: 3em; }
 h1 small { font-size: .4em; text-transform: uppercase; }
+.container { display: block; background-color: #fff; padding: 10px; border: 1px solid #000; box-shadow: 2px 2px 0px #000; margin: 10px auto; }
 
 /* message window */
 #pixelChat-messages { height: 325px; overflow-y: scroll; border: 1px solid #000; padding: 0; margin: 0 0 10px; text-align: center; background: aqua; }
@@ -39,5 +41,6 @@ h1 small { font-size: .4em; text-transform: uppercase; }
 .button.current { border-width: 4px; vertical-align: top; }
 
 /* misc */
-footer { font-weight: bold; font-size: 20px; text-align: center; margin: 10px auto 0; }
+footer { font-weight: bold; font-size: 1em; text-align: center;  }
 footer p { margin: 0; }
+

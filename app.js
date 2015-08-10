@@ -4,6 +4,7 @@
 var configDoc = require('./config');
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
+var username = '';
 
 passport.use(new Strategy({
     consumerKey: twitterAPI.consumer_key,
@@ -68,9 +69,11 @@ app.get('/login/twitter/return',
     
     // only allow user if they are on the config list
     if ( twitterUsers.indexOf(req.user.username) !== -1 ) {
+      res.cookie('pixelchat', req.user.username);
       res.redirect('/chat');
     }
     else {
+      res.clearCookie('pixelchat');
       res.redirect('/nope');
     }
   });
@@ -80,7 +83,6 @@ app.get('/chat',
   function(req, res){
     res.sendFile(__dirname + '/views/chat.html');
   });
-
 
 
 
