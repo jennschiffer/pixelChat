@@ -21,7 +21,7 @@ window.onload = function() {
   };
       
   var system = {
-    io: 'http://localhost:3000',
+    io: 'http://127.0.0.1:3000',
     name: 'pixelChat',
     canvasHeight: 150,
     canvasWidth: 400,
