@@ -142,7 +142,7 @@ window.onload = function() {
     for ( var i = 0; i < banter.length; i++ ) {
       banterHTML += '<li><a href="' + banter[i].imgURL + '" target="_blank"><img src="' + banter[i].imgURL +
               '" /></a><span class="nickname"><a href="http://twitter.com/' + banter[i].username +
-              '" target="_blank">@' + banter[i].username + '</span></a><button class="reply">reply</button></li>';
+              '" target="_blank">@' + banter[i].username + '</a></span><button class="reply">reply</button></li>';
     }
     messageContainer.innerHTML = banterHTML;
     $(messageContainer).animate({"scrollTop": messageContainer.scrollHeight}, "slow");
