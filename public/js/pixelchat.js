@@ -50,7 +50,7 @@ window.onload = function() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0,0,system.canvasWidth,system.canvasHeight);
         
-    $canvas.mousedown(onPenDown).mouseup(onPenUp);
+    $canvas.mousedown(onPenDown).mouseup(onPenUp).mouseout(onPenUp);
     $canvas[0].addEventListener('touchstart', onPenDown, false);
     $canvas[0].addEventListener('touchend', onPenUp, false);
     
@@ -123,7 +123,9 @@ window.onload = function() {
     }
     
     for ( var i = 0; i < banter.length; i++ ) {
-      banterHTML += '<li><img src="' + banter[i].imgURL + '" /><span class="nickname"><a href="http://twitter.com/' + banter[i].username + '" target="_blank">@' + banter[i].username + '</a></span></li>';
+      banterHTML += '<li><a href="' + banter[i].imgURL + '" target="_blank"><img src="' + banter[i].imgURL + 
+              '" /></a><span class="nickname"><a href="http://twitter.com/' + banter[i].username + 
+              '" target="_blank">@' + banter[i].username + '</a></span></li>';
     }
     messageContainer.innerHTML = banterHTML;
     $(messageContainer).animate({"scrollTop": messageContainer.scrollHeight}, "slow");
@@ -175,10 +177,14 @@ window.onload = function() {
   var getCookies = function() {
     var cookies = {};
     var documentCookies = document.cookie;
-    if (documentCookies === "")
+    
+    if (documentCookies === "") {
       return cookies;
+    }
+    
     var cookiesArray = documentCookies.split("; ");
-    for(var i = 0; i < cookiesArray.length; i++) {
+    
+    for (var i = 0; i < cookiesArray.length; i++) {
       var cookie = cookiesArray[i];
       var endOfName = cookie.indexOf("=");
       var name = cookie.substring(0, endOfName);
@@ -186,6 +192,7 @@ window.onload = function() {
       value = decodeURIComponent(value);
       cookies[name] = value;
     }
+    
     return cookies;
   };
 
