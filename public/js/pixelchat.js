@@ -55,7 +55,13 @@ window.onload = function() {
     $canvas.mousedown(onPenDown).mouseup(onPenUp).mouseout(onPenUp);
     $canvas[0].addEventListener('touchstart', onPenDown, false);
     $canvas[0].addEventListener('touchend', onPenUp, false);
-    
+
+    // reply button
+    $(messageContainer).on('click', '.reply', function (e) {
+      e.preventDefault();
+      ctx.drawImage($(e.target).parent().find('img')[0], 0, 0);
+    });
+
     // art tools
     $colorButtons = $('.button');
     $colorButtons.each(function(){
@@ -141,9 +147,9 @@ window.onload = function() {
     }
     
     for ( var i = 0; i < banter.length; i++ ) {
-      banterHTML += '<li><a href="' + banter[i].imgURL + '" target="_blank"><img src="' + banter[i].imgURL + 
-              '" /></a><span class="nickname"><a href="http://twitter.com/' + banter[i].username + 
-              '" target="_blank">@' + banter[i].username + '</a></span></li>';
+      banterHTML += '<li><a href="' + banter[i].imgURL + '" target="_blank"><img src="' + banter[i].imgURL +
+              '" /></a><span class="nickname"><a href="http://twitter.com/' + banter[i].username +
+              '" target="_blank">@' + banter[i].username + '</span><button class="reply">reply</button></a></li>';
     }
     messageContainer.innerHTML = banterHTML;
     $(messageContainer).animate({"scrollTop": messageContainer.scrollHeight}, "slow");
