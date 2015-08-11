@@ -51,6 +51,8 @@ window.onload = function() {
     ctx.fillRect(0,0,system.canvasWidth,system.canvasHeight);
         
     $canvas.mousedown(onPenDown).mouseup(onPenUp);
+    $canvas[0].addEventListener('touchstart', onPenDown, false);
+    $canvas[0].addEventListener('touchend', onPenUp, false);
     
     // art tools
     $colorButtons = $('.button');

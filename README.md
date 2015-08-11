@@ -15,7 +15,7 @@ a node/websockets drawing chat adapted from [jsChat](http://github.com/jennschif
 3. create a [twitter app](http://apps.twitter.com/), update `config-example.js` and rename it to `config.js` for authenticationß
 4. to start chat server, run <code>npm start</code>
 5. direct your browser to <code>localhost:3000</code>
-6. if running this on another port or domain, change line 24 in `app.js` to match or else you'll get CORS errors
+6. if running this on another port or domain, change line 24 in `app/pixelchat.js` to match or else you'll get CORS errors
 
 ### Notes 
 
