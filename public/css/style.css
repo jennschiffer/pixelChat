@@ -49,6 +49,6 @@ footer p { margin: 0; }
   and (max-device-width: 480px)
   and (-webkit-min-device-pixel-ratio: 2) {
   
-  #pixelChat { width: 100%; }
+  #pixelChat { }
   h1 small { display: block; }
 }
