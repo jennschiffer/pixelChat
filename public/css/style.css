@@ -50,4 +50,5 @@ footer p { margin: 0; }
   and (-webkit-min-device-pixel-ratio: 2) {
   
   #pixelChat { width: 100%; }
+  h1 small { display: block; }
 }
