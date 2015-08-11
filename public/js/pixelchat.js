@@ -3,6 +3,7 @@ window.onload = function() {
   var messageContainer,
       messageForm,
       formAlert,
+      disconnected,
       username,
       imgURL, 
       socket, 
@@ -92,7 +93,12 @@ window.onload = function() {
     socket = io.connect(system.io);
     
     socket.on('connect',function() {
-      initpixelChat(); 
+      if ( !disconnected ) { 
+        initpixelChat(); 
+      }
+      else {
+        formAlert.innerHTML = '';
+      }
     });
     
     socket.on('message',function(data) {
@@ -104,7 +110,8 @@ window.onload = function() {
       }
     });
     
-    socket.on('disconnect',function() {            
+    socket.on('disconnect',function() {   
+      disconnected = true;         
       formAlert.innerHTML = 'DISCONNECTED. PLS REFRESH.';
     });
   };
