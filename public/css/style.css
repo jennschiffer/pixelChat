@@ -22,23 +22,23 @@ h1 small { font-size: .4em; text-transform: uppercase; }
 /* message window */
 #pixelChat-messages { height: 325px; overflow-y: scroll; border: 1px solid #000; padding: 0; margin: 0 0 10px; text-align: center; background: aqua; }
 #pixelChat-messages li { margin: 5px 0; padding: 0; list-style: none; position: relative; }
-#pixelChat-messages li img { border: 1px solid #000; }
-#pixelChat-messages li .nickname { position: absolute; right: 9px; bottom: 8px; background: #fff; border: 1px solid #000; padding: 2px; opacity: .9; }
+#pixelChat-messages li img { border: 1px solid #000; box-shadow: 2px 2px 0 #000; }
+#pixelChat-messages li .nickname { position: absolute; right: 10px; bottom: 8px; background: #fff; border: 1px solid #000; padding: 2px; opacity: .9; box-shadow: 2px 2px 0 #000; }
 
 /* message form*/
 #send-message { background: lime; padding: 5px; color: #000; border: 1px solid #000;}
-#send-message h3 { font-size: 20px; margin: 0 0 5px; }
+#send-message h3 { font-size: 20px; margin: 0 10px 5px; }
 #send-message input[type="text"] { border: 1px solid #000; padding: 2px; }
 #send-message .buttons { text-align: right; }
 #form-alert { background-color: #f00; color: #fff; font-weight: normal; font-size: .8em; }
 
 /* message canvas - set to 400px x 150px in index.html */
-#send-message canvas { display: block; border: 1px solid #000; background: #fff; margin: 3px auto; }
+#send-message canvas { display: block; border: 1px solid #000; background: #fff; margin: 3px auto; box-shadow: 2px 2px 0px #000; }
 
 /* art tools */
 #pixelChat-tools { text-align: center; }
-.button { width: 12px; height: 12px; border: 1px solid #000; margin: 2px; display: inline-block; }
-.button.current { border-width: 4px; vertical-align: top; }
+.button { width: 20px; height: 20px; border: 1px solid #000; margin: 2px; display: inline-block; }
+.button.current { vertical-align: top; box-shadow: 2px 2px 0px #000; }
 
 /* misc */
 footer { font-weight: bold; font-size: 1em; text-align: center;  }
