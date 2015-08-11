@@ -89,14 +89,20 @@ app.get('/chat',
 // socket.io 
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var chatHistory = [];
 
 server.listen(3000);
 
 io.sockets.on('connection', function (socket) {
+  
+  if ( chatHistory ) {
+    io.sockets.emit('message', { history: chatHistory} );
+  }
 
   socket.on('send', function (data) { 
     if ( data.chat) {
-      io.sockets.emit('message',data);            
+      chatHistory.push(data.chat);
+      io.sockets.emit('message', data);            
     } 
   });
 

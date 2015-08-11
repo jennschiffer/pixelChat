@@ -99,6 +99,9 @@ window.onload = function() {
       if ( data.chat ) {
         updateMessageWindow(data.chat);
       }
+      else if ( data.history ) {
+        updateMessageWindow(data.history); 
+      }
     });
     
     socket.on('disconnect',function() {            
@@ -114,7 +117,15 @@ window.onload = function() {
   /* socket */
   
   var updateMessageWindow = function(chatData) {
-    banter.push(chatData);
+
+    if ( Array.isArray(chatData) ) {
+      // initial loading of chat history
+      banter = chatData;
+    }
+    else {
+      banter.push(chatData);
+    }
+    
     var banterHTML = '';
     
     // remove one if array >= 50
