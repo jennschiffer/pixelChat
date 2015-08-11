@@ -105,7 +105,7 @@ window.onload = function() {
     });
     
     socket.on('disconnect',function() {            
-      messageForm.innerHTML = copy.disconnected;
+      formAlert.innerHTML = 'DISCONNECTED. PLS REFRESH.';
     });
   };
   
@@ -158,10 +158,18 @@ window.onload = function() {
     e.preventDefault();
     drawPixel(e);
     $canvas.on('mousemove', drawPixel);
+    $canvas[0].addEventListener('touchmove', touchDraw, false);
   };
   
   var onPenUp = function(e) {
     $canvas.off('mousemove');
+  };
+  
+  var touchDraw = function(e) {
+    // for each finger in your fingers
+    for ( var i = 0; i < e.touches.length; i++ ) {
+      drawPixel(e.touches[i]);
+    }
   };
     
   var drawPixel = function(e) {    
