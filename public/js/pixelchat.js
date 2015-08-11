@@ -56,6 +56,12 @@ window.onload = function() {
     $canvas[0].addEventListener('touchstart', onPenDown, false);
     $canvas[0].addEventListener('touchend', onPenUp, false);
     
+    // click on art to copy ("reply")
+    $(messageContainer).on('click', 'img', function (e) {
+      e.preventDefault();
+      ctx.drawImage(e.target, 0, 0);
+    });
+    
     // art tools
     $colorButtons = $('.button');
     $colorButtons.each(function(){
