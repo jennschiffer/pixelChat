@@ -37,6 +37,7 @@ window.onload = function() {
     /*** pixelChatroom and its events ***/
     messageContainer = document.getElementById('pixelChat-messages');
     usernameContainer = document.getElementById('pixelChat-username');
+    formAlert = document.getElementById('form-alert');
     usernameContainer.innerHTML = username;
 
     messageForm = document.forms[0];
@@ -72,7 +73,6 @@ window.onload = function() {
         
     // submit form event
     messageForm.onsubmit = function() {
-      formAlert = document.getElementById('form-alert');
       formAlert.innerHTML = '';
   
       imgURL = $canvas[0].toDataURL("image/png");
