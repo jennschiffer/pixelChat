@@ -1,6 +1,8 @@
+'use strict';
+
 (function() {
     
-  var messageContainer,
+  let messageContainer,
       messageForm,
       usernameContainer,
       initialMessage,
@@ -10,20 +12,21 @@
       imgURL, 
       socket, 
       banter,
-      $canvas,
-      $colorButtons,
+      colorButtons,
+      pixelCanvas,
       ctx;
       
-  var pixel = {
+  const pixel = {
     size: 5,
     color: '#000'
   };
       
-  var copy = {
+  const copy = {
     disconnected: 'You have been disconnected.<br />Refresh to try entering again.',
   };
-      
-  var system = {
+  
+  // initial system info
+  const system = {
     name: 'pixelChat',
     canvasHeight: 150,
     canvasWidth: 400,
@@ -33,56 +36,61 @@
     
   /*** INIT SOCKETS AND CHAT ***/
 
-  var initpixelChat = function() {
+  const initpixelChat = function() {
       
     /*** pixelChatroom and its events ***/
     messageContainer = document.getElementById('pixelChat-messages');
     usernameContainer = document.getElementById('pixelChat-username');
     formAlert = document.getElementById('form-alert');
-    usernameContainer.innerHTML = username;
+    usernameContainer.innerHTML = username || system.name;
 
     messageForm = document.forms[0];
     banter = [];
     
-    initialMessage = '<li><img src="' + system.initMessage + '" /><span class="nickname"><a target="_blank" href="http://twitter.com/jennschiffer">@jennschiffer</a></span></li>';
+    initialMessage = '<li><a href="' + system.initMessage + '" target="_blank"><img src="' + system.initMessage +
+      '" /></a><span class="nickname"><a href="http://twitter.com/jennschiffer">@jennschiffer</a></span><button class="remix">remix</button></li>';
     messageContainer.innerHTML = initialMessage;
   
     // canvas stuff 
-    $canvas = $('canvas');
-    ctx = $canvas[0].getContext("2d");
+    pixelCanvas = document.getElementsByTagName('canvas')[0];
+    ctx = pixelCanvas.getContext("2d");
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0,0,system.canvasWidth,system.canvasHeight);
         
-    $canvas.mousedown(onPenDown).mouseup(onPenUp).mouseout(onPenUp);
-    $canvas[0].addEventListener('touchstart', onPenDown, false);
-    $canvas[0].addEventListener('touchend', onPenUp, false);
-
-    // remix button
-    $(messageContainer).on('click', '.remix', function (e) {
-      e.preventDefault();
-      ctx.drawImage($(e.target.parentNode).find('img')[0], 0, 0);
-    });
+    pixelCanvas.addEventListener('mousedown', onPenDown);
+    pixelCanvas.addEventListener('mouseup', onPenUp);
+    pixelCanvas.addEventListener('mouseout', onPenUp);
+    pixelCanvas.addEventListener('touchstart', onPenDown);
+    pixelCanvas.addEventListener('touchend', onPenUp);
+    
+    messageContainer.onclick = function(e) {
+      if ( e.target.className === 'remix' ) {
+        e.preventDefault();
+        const drawingToRemix = e.target.parentNode.getElementsByTagName('img')[0];
+        ctx.drawImage(drawingToRemix, 0, 0);
+      }
+    }
 
     // art tools
-    $colorButtons = $('.button');
-    $colorButtons.each(function(){
-      var $this = $(this);
-      $this.css('background-color', $this.attr('data-color'));
-    });
-    
-    // color change event
-    $colorButtons.click(function(){
-      $colorButtons.removeClass('current');
-      var $this = $(this).addClass('current');
-      var newColor = $this.attr('data-color');
-      pixel.color = newColor;
+    colorButtons = document.getElementsByClassName('button');
+    [].forEach.call(colorButtons, function(button) {
+      button.style.backgroundColor = button.dataset.color;
+      button.onclick = function(e) {
+        [].forEach.call(colorButtons, function(b) {
+          b.className = b.className.replace(/(?:^|\s)current(?!\S)/g , '');
+        });
+        
+        const thisButton = e.target;
+        thisButton.className += ' current';
+        pixel.color = thisButton.dataset.color;
+      }
     });
         
     // submit form event
     messageForm.onsubmit = function() {
       formAlert.innerHTML = '';
   
-      imgURL = $canvas[0].toDataURL("image/png");
+      imgURL = pixelCanvas.toDataURL("image/png");
       sendMessage( username, imgURL );
       resetCanvas();
       return false;
@@ -95,8 +103,8 @@
     };
   };
       
-  var initSocket = function() {
-      
+  const initSocket = function() {
+    // ignore whatever error is thrown here and forgive me for my sins
     socket = io.connect(system.io);
     
     socket.on('connect',function() {
@@ -128,7 +136,7 @@
   
   /* socket */
   
-  var updateMessageWindow = function(chatData) {
+  const updateMessageWindow = function(chatData) {
 
     if ( Array.isArray(chatData) ) {
       // initial loading of chat history
@@ -138,24 +146,25 @@
       banter.push(chatData);
     }
     
-    var banterHTML = '';
+    let banterHTML = '';
     
     // remove one if array >= 50
     if ( banter.length >= 50 ) {
       banter.shift();
     }
     
-    for ( var i = 0; i < banter.length; i++ ) {
+    for ( let i = 0; i < banter.length; i++ ) {
       banterHTML += '<li><a href="' + banter[i].imgURL + '" target="_blank"><img src="' + banter[i].imgURL +
-              '" /></a><span class="nickname"><a href="http://twitter.com/' + banter[i].username +
-              '" target="_blank">@' + banter[i].username + '</a></span><button class="remix">remix</button></li>';
+        '" /></a><span class="nickname"><a href="http://twitter.com/' + banter[i].username +
+        '" target="_blank">@' + banter[i].username + '</a></span><button class="remix">remix</button></li>';
     }
+    
     messageContainer.innerHTML = banterHTML;
-    $(messageContainer).animate({"scrollTop": messageContainer.scrollHeight}, "slow");
+    messageContainer.scrollTop = messageContainer.scrollHeight;
   };    
   
-  var sendMessage = function( nick, url ) {
-    var message = {
+  const sendMessage = function( nick, url ) {
+    const message = {
       username: nick,
       imgURL: url,
       timestamp: Date.now()
@@ -166,29 +175,30 @@
     
   /* drawing */
     
-  var onPenDown = function(e) {
+  const onPenDown = function(e) {
     e.preventDefault();
     drawPixel(e);
-    $canvas.on('mousemove', drawPixel);
-    $canvas[0].addEventListener('touchmove', touchDraw, false);
+    pixelCanvas.addEventListener('mousemove', drawPixel);
+    pixelCanvas.addEventListener('touchmove', touchDraw, false);
   };
   
-  var onPenUp = function(e) {
-    $canvas.off('mousemove');
+  const onPenUp = function(e) {
+    pixelCanvas.removeEventListener('mousemove', drawPixel);
   };
   
-  var touchDraw = function(e) {
+  const touchDraw = function(e) {
     // for each finger in your fingers
-    for ( var i = 0; i < e.touches.length; i++ ) {
+    for ( let i = 0; i < e.touches.length; i++ ) {
       drawPixel(e.touches[i]);
     }
   };
     
-  var drawPixel = function(e) {    
-    var canvasPosition = $canvas.offset();
-    var xPos = e.pageX - canvasPosition.left;
-    var yPos = e.pageY - canvasPosition.top;
-
+  const drawPixel = function(e) {    
+    // by far the hardest problem in computer science is knowing where the hell i clicked
+    const canvasPosition = pixelCanvas.getBoundingClientRect();
+    let xPos = e.clientX - canvasPosition.left;
+    let yPos = e.clientY - canvasPosition.top;
+    
     ctx.beginPath();  
     xPos = ( Math.ceil(xPos/pixel.size) * pixel.size ) - pixel.size;
     yPos = ( Math.ceil(yPos/pixel.size) * pixel.size ) - pixel.size;
@@ -198,28 +208,28 @@
     ctx.fillRect(xPos,yPos,pixel.size,pixel.size);
   };
     
-  var resetCanvas = function() {
+  const resetCanvas = function() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0,0,system.canvasWidth,system.canvasHeight);
   };
   
   /* misc */
   
-  var getCookies = function() {
-    var cookies = {};
-    var documentCookies = document.cookie;
+  const getCookies = function() {
+    const cookies = {};
+    const documentCookies = document.cookie;
     
-    if (documentCookies === "") {
+    if (documentCookies === '') {
       return cookies;
     }
     
-    var cookiesArray = documentCookies.split("; ");
+    const cookiesArray = documentCookies.split('; ');
     
-    for (var i = 0; i < cookiesArray.length; i++) {
-      var cookie = cookiesArray[i];
-      var endOfName = cookie.indexOf("=");
-      var name = cookie.substring(0, endOfName);
-      var value = cookie.substring(endOfName + 1);
+    for (let i = 0; i < cookiesArray.length; i++) {
+      const cookie = cookiesArray[i];
+      const endOfName = cookie.indexOf("=");
+      const name = cookie.substring(0, endOfName);
+      let value = cookie.substring(endOfName + 1);
       value = decodeURIComponent(value);
       cookies[name] = value;
     }
@@ -229,8 +239,8 @@
 
     
   /*** INIT ***/
-  var init = (function() {
-    var cookies = getCookies();
+  const init = (function() {
+    const cookies = getCookies();
     
     if ( cookies.pixelchat) {
       username = cookies.pixelchat;      
