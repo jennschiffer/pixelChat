@@ -1,15 +1,14 @@
 /*** pixelChat app.js ***/
 
 // twitter passport
-var configDoc = require('./config');
 var passport = require('passport');
 var Strategy = require('passport-twitter').Strategy;
 var username = '';
 
 passport.use(new Strategy({
-    consumerKey: twitterAPI.consumer_key,
-    consumerSecret: twitterAPI.consumer_secret,
-    callbackURL: twitterAPI.callback_url
+    consumerKey: process.env.TWITTER_CONSUMER_KEY,
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL
 },
 function(token, tokenSecret, profile, cb) {
   return cb(null, profile);
@@ -22,7 +21,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
-
 
 
 // express 
@@ -41,7 +39,6 @@ app.use(expressSession({secret:'pumajef', resave:true, saveUninitialized:true })
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
-
 
 
 // routes
@@ -68,7 +65,7 @@ app.get('/login/twitter/return',
   function(req, res) {
     
     // only allow user if they are on the config list
-    if ( twitterUsers.indexOf(req.user.username) !== -1 ) {
+    if ( process.env.PIXELCHAT_TWITTER_USERS.indexOf(req.user.username) !== -1 ) {
       res.cookie('pixelchat', req.user.username);
       res.redirect('/chat');
     }
@@ -83,7 +80,6 @@ app.get('/chat',
   function(req, res){
     res.sendFile(__dirname + '/views/chat.html');
   });
-
 
 
 // socket.io 
