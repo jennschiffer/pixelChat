@@ -160,7 +160,12 @@
     }
     
     messageContainer.innerHTML = banterHTML;
-    messageContainer.scrollTop = messageContainer.scrollHeight;
+    
+    // there has GOT to be a better way lmaoooooooOOOooOOooOOOoooooo
+    window.setTimeout(function(){
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }, 200);
+
   };    
   
   const sendMessage = function( nick, url ) {
