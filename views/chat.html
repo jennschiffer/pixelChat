@@ -1,23 +1,18 @@
 <!doctype html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=0.8" />
     <title>pixelChat &bull; a make8bitart.com project</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
-
 <body>
-
   <div id="pixelChat">
     <h1 class="container">pixelChat <small>speak in 8-bit & be nice.</small></h1>
-
     <ul id="pixelChat-messages" class="container"></ul>
-    
     <form id="send-message" action="" class="container">
-     	<h3>hi <span id="pixelChat-username">pal</span>! draw a message! <small id="form-alert"></small></h3>
-            
+      <h3>hi <span id="pixelChat-username">pal</span>! draw a message! <small id="form-alert"></small></h3>
       <canvas width="400" height="150">You have 99 problems, and a browser without HTML5 Canvas support is 1.</canvas>
-     
       <div id="pixelChat-tools">
         <div class="button current" data-color="black"></div>
         <div class="button" data-color="white"></div>
@@ -29,7 +24,7 @@
         <div class="button" data-color="purple"></div>
         <div class="button" data-color="brown"></div>
         <div class="button" data-color="aqua"></div>
-        <div class="button" data-color="salmon"></div>	            
+        <div class="button" data-color="salmon"></div>
         <div class="button" data-color="hotpink"></div>
         <div class="button" data-color="lime"></div>
         <div class="button" data-color="royalblue"></div>
@@ -38,7 +33,7 @@
         <div class="button" data-color="lightblue"></div>
         <div class="button" data-color="aquamarine"></div>
         <div class="button" data-color="blueviolet"></div>
-        <div class="button" data-color="crimson"></div>	            
+        <div class="button" data-color="crimson"></div>
         <div class="button" data-color="fuchsia"></div>
         <div class="button" data-color="cyan"></div>
         <div class="button" data-color="lightslategray"></div>
@@ -46,21 +41,17 @@
         <div class="button" data-color="tan"></div>
         <div class="button" data-color="turquoise"></div>
       </div>
-      
       <div class="buttons">
-        <input id="clear-canvas" type="reset" value="clear canvas" /> 
+        <input id="clear-canvas" type="reset" value="clear canvas" />
         <input id="send" type="submit" value="send message" />
       </div>
     </form>
-    
     <footer class="container">
-    	<p>!!! made by <a href="http://jennmoney.biz">jenn</a> !!! go <a href="http://make8bitart.com">make8bitart.com</a> !!!</p>
+        <p>!!! made by <a href="http://jennmoney.biz">jenn</a> !!! go <a href="http://make8bitart.com">make8bitart.com</a> !!!<br />
+        !!! <a href="https://glitch.com/edit/#!/pixelchat">view source on glitch</a> !!!</p>
     </footer>
   </div>
-
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/jquery.js"></script>
-<script src="/js/pixelchat.js"></script>
-
+<script src="/js/pixelchat_es6_vanilla.js"></script>
 </body>
 </html>
