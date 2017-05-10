@@ -13,15 +13,16 @@ a node/websockets drawing chat adapted from [jsChat](http://github.com/jennschif
 
 ### Install on Glitch
 1. [remix pixelchat on glitch](https://glitch.com/edit/#!/remix/pixelchat)
-2. create a [twitter app](http://apps.twitter.com/), update `.env`
+2. create a [twitter app](http://apps.twitter.com/), update `.env` with twitter keys
 3. update `.env` with the list of twitter handles you'd like to whitelist
 
 ### Install outside of [Glitch](http://pixelchat.glitch.me)
 
 1. add files to some directory on your server - [node must be installed](http://nodejs.org/download/).
 2. go into the pixelchat directory and install dependencies by running: <code>npm install</code> (dependencies: express, socket.io)
-3. create a [twitter app](http://apps.twitter.com/), update `.env`
-3. update `.env` with the list of twitter handles you'd like to whitelist
+3. create a [twitter app](http://apps.twitter.com/), update `.env` with twitter keys
+4. update `.env` with the list of twitter handles you'd like to whitelist
+5. run `node app.js` to launch 
 
 ### Notes 
 
